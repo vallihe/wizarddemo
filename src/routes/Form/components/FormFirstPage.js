@@ -19,7 +19,9 @@ let FormFirstPage = (props) => {
   ) 
 }
 
-
+/*FormFirstPage.propTypes = {
+  onSubmit: PropTypes.func.isRequired
+}*/
 
 const selector = formValueSelector('Form')
 
