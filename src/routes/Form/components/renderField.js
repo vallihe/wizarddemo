@@ -4,7 +4,7 @@ const renderField = ({ input, label, type, value, meta: { touched, error } }) =>
   <div>
     <label>{label}</label>
     <div>
-      <input {...input} placeholder={label} type={type} value={value}/>
+      <input {...input} placeholder={label} type={type} onChange={({value}).onChange} value={value} ref={(input) => { value = input; }} />
       {touched && error && <span>{error}</span>}
     </div>
   </div>

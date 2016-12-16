@@ -6,7 +6,7 @@ const colors = [ 'Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Indigo', 'Violet' 
 const renderColorSelector = ({ input, meta: { touched, error } }) => (
   <div>
     <select {...input}>
-      <option value="">Select a color...</option>
+      <option value="Valitse"></option>
       {colors.map(val => <option value={val} key={val}>{val}</option>)}
     </select>
     {touched && error && <span>{error}</span>}
@@ -30,12 +30,12 @@ const FormThirdPage = (props) => {
       <div>
         <label>Notes</label>
         <div>
-          <Field name="notes" component="textarea" placeholder="Notes"/>
+          <Field name="notes" component="textarea" value="" placeholder="Notes"/>
         </div>
       </div>
       <div>
         <button type="button" className="previous" onClick={previousPage}>Previous</button>
-        <button type="submit" disabled={pristine || submitting}>Submit</button>
+        <button type="submit" onSubmit={handleSubmit}>Submit</button>
       </div>
     </form>
   )
