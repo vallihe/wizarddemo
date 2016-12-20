@@ -16,6 +16,10 @@ export const Header = () => (
     <Link to='/form' activeClassName='route--active'>
       Form
     </Link>
+    {' · '}
+    <Link to='/standardform' activeClassName='route--active'>
+      Standard Form
+    </Link>
   </div>
 )
 

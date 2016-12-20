@@ -4,14 +4,15 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import validate from './validate'
-import FormFirstPage from './FormFirstPage'
-import FormSecondPage from './FormSecondPage'
-import FormThirdPage from './FormThirdPage'
+import FormFirstPage from '../../../components/Forms/FormFirstPage'
+import FormSecondPage from '../../../components/Forms/FormSecondPage'
+import FormThirdPage from '../../../components/Forms/FormThirdPage'
 import FormSubmit from './FormSubmit'
 
 class Form extends Component {
 
   static propTypes = {
+    PropTypes,
     actions: PropTypes.objectOf(PropTypes.func),
     dispatch: PropTypes.func,
     fields: PropTypes.object,
@@ -37,58 +38,53 @@ class Form extends Component {
   }
 
   handleForm = () => {
-    this.props.Form.form.Form.values
+
   }
 
-  onSubmit() {
-    console.log(this.props)
+  onSubmit = () => {
+    //console.log(this.props)
     //this.props({ firstname: Form.form.Form.values.firstName, lastname: Form.form.Form.values.lastName })
-    console.log(this.props.Form.form.Form.values)
+    //console.log(this.props.Form.form.Form.values)
 
   }
 
   render() {
-    const { onSubmit, fields, values, handleForm } = this.props
+    const { getForm, onSubmit, fields, values, handleForm } = this.props
     const { page } = this.state
-    console.log( handleForm)
-
     return (
       <div>
         {page === 1 && <FormFirstPage onSubmit={this.nextPage}/>}
         {page === 2 && <FormSecondPage previousPage={this.previousPage} onSubmit={this.nextPage}/>}
         {page === 3 && <FormThirdPage previousPage={this.previousPage} onSubmit={this.nextPage}/>}
-        {page === 4 && <FormSubmit previousPage={this.previousPage} handleForm={this.handleForm} onSubmit={this.onSubmit}/>}
+        {page === 4 && <FormSubmit {...getForm} previousPage={this.previousPage} handleForm={this.handleForm} />}
       </div>
     )
   }
 }
 
 Form.propTypes = {
-  //fields: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired
-
+  handleForm: React.PropTypes.func,
+  onSubmit: React.PropTypes.func,
+  getForm: React.PropTypes.object,
 }
 
-function mapStateToProps(state) {  
-  return {
-    Form: state.form,
-    fields: PropTypes.func.isRequired,
+const mapStateToProps = (state) => ({  
     onSubmit: PropTypes.func.isRequired,
     submitSucceeded: state.submitSucceeded,
+    getForm: state.form.form.Form,
+  })
 
-  };
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    actions: bindActionCreators(Form, dispatch)}
-}
+const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators(Object.assign({}), Form, dispatch),
+    Form
+})
 
 Form = reduxForm({
     form: 'Form',
-    onSubmit(data, dispatch) {
+    /*onSubmit(data, dispatch) {
       dispatch(reduxForm.startSubmit('Form'))
-    },
+    },*/
+    onSubmit: FormSubmit,
     fields: [],
     validate
 })(Form)

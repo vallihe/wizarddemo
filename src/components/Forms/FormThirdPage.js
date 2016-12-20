@@ -1,12 +1,16 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import validate from './validate'
+
+import validate from '../../routes/Form/components/validate'
+import renderField from '../../routes/Form/components/renderField'
+import renderSelect from '../../routes/Form/components/renderSelect'
+
 const colors = [ 'Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Indigo', 'Violet' ]
 
 const renderColorSelector = ({ input, meta: { touched, error } }) => (
   <div>
     <select {...input}>
-      <option value="Valitse"></option>
+      <option></option>
       {colors.map(val => <option value={val} key={val}>{val}</option>)}
     </select>
     {touched && error && <span>{error}</span>}

@@ -2,21 +2,23 @@ import React from 'react'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 
-import validate from './validate'
-import renderField from './renderField'
+import validate from '../../routes/Form/components/validate'
+import renderField from '../../routes/Form/components/renderField'
 
 
 let FormFirstPage = (props) => {
 
   const { fullName, handleSubmit } = props
   return (
-    <form onSubmit={handleSubmit}>
-      <Field name="firstName" type="text" component={renderField} label="First Name" />
-      <Field name="lastName" type="text" component={renderField} label="Last Name" />
-      <div>
-        <button type="submit" className="next">Next</button>
-      </div>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <Field name="firstName" type="text" component={renderField} label="First Name" />
+        <Field name="lastName" type="text" component={renderField} label="Last Name" />
+        <div>
+          <button type="submit" className="next">Next</button>
+        </div>
+      </form>
+    </div>
   ) 
 }
 

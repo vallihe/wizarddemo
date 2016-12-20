@@ -1,8 +1,9 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import validate from './validate'
-import renderField from './renderField'
-import renderSelect from './renderSelect'
+
+import validate from '../../routes/Form/components/validate'
+import renderField from '../../routes/Form/components/renderField'
+import renderSelect from '../../routes/Form/components/renderSelect'
 
 
 const {DOM: { input, email }} = React

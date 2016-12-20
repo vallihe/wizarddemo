@@ -14,20 +14,18 @@ export function formChange (value) {
 }
 
 // ------------------------------------
-// Specialized Action Creator
+// Action Handlers
 // ------------------------------------
-/*
-export const updateForm = ({ dispatch }) => {
-  return (nextLocation) => dispatch(locationChange(nextLocation))
+const ACTION_HANDLERS = {
+  [FORM_CHANGE] : (state, action) => state + action.payload
 }
-*/
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 const initialState = null
 export default function formReducer (state = initialState, action) {
-  return action.type === FORM_CHANGE
-    ? action.payload
-    : state
+  const handler = ACTION_HANDLERS[action.type]
+  
+  return handler ? handler(state, action) : state
 }
