@@ -37,6 +37,7 @@ export default (store) => ({
   path : 'form',
 
   getComponent (nextState, cb) {
+    console.log(nextState.location.pathname)
   	require.ensure([], (require) => {
   		const Form = require('./components/Form').default
   		const reducer = combineReducers({ form: reduxFormReducer })

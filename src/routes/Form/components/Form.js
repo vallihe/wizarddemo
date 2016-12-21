@@ -24,7 +24,8 @@ class Form extends Component {
     this.nextPage = this.nextPage.bind(this)
     this.previousPage = this.previousPage.bind(this)
     this.state = {
-      page: 1
+      page: 1,
+      flow: [],
     }
     this.onSubmit = this.onSubmit.bind(this)
   }
@@ -40,6 +41,11 @@ class Form extends Component {
   handleForm = () => {
 
   }
+  chooseSmall = () => {
+    const smallForm = { flow: 'small' }
+    this.setState(smallForm)
+    console.log(this.state)
+  }
 
   onSubmit = () => {
     //console.log(this.props)
@@ -49,13 +55,16 @@ class Form extends Component {
   }
 
   render() {
-    const { getForm, onSubmit, fields, values, handleForm } = this.props
+    console.log(this.props.route)
+    console.log(this.props)
+    const { flow, getForm, onSubmit, fields, values, handleForm } = this.props
     const { page } = this.state
     return (
       <div>
-        {page === 1 && <FormFirstPage onSubmit={this.nextPage}/>}
-        {page === 2 && <FormSecondPage previousPage={this.previousPage} onSubmit={this.nextPage}/>}
-        {page === 3 && <FormThirdPage previousPage={this.previousPage} onSubmit={this.nextPage}/>}
+        <p onClick={this.chooseSmall}>Suppea</p>
+        {page === 1 && <FormFirstPage onSubmit={this.nextPage} flow={this.state.flow}/>}
+        {page === 2 && <FormSecondPage previousPage={this.previousPage} onSubmit={this.nextPage} flow="medium large"/>}
+        {page === 3 && <FormThirdPage previousPage={this.previousPage} onSubmit={this.nextPage} flow="large"/>}
         {page === 4 && <FormSubmit {...getForm} previousPage={this.previousPage} handleForm={this.handleForm} />}
       </div>
     )
@@ -66,13 +75,14 @@ Form.propTypes = {
   handleForm: React.PropTypes.func,
   onSubmit: React.PropTypes.func,
   getForm: React.PropTypes.object,
+  //flow: React.PropTypes.object,
 }
 
 const mapStateToProps = (state) => ({  
-    onSubmit: PropTypes.func.isRequired,
-    submitSucceeded: state.submitSucceeded,
-    getForm: state.form.form.Form,
-  })
+  onSubmit: PropTypes.func.isRequired,
+  submitSucceeded: state.submitSucceeded,
+  getForm: state.form.form.Form,
+})
 
 const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators(Object.assign({}), Form, dispatch),
@@ -84,6 +94,7 @@ Form = reduxForm({
     /*onSubmit(data, dispatch) {
       dispatch(reduxForm.startSubmit('Form'))
     },*/
+    //flow: {},
     onSubmit: FormSubmit,
     fields: [],
     validate

@@ -8,12 +8,20 @@ import renderField from '../../routes/Form/components/renderField'
 
 let FormFirstPage = (props) => {
 
-  const { fullName, handleSubmit } = props
+  console.log(props.flow);
+  //debugger;
+  const { flow, handleSubmit } = props
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <Field name="firstName" type="text" component={renderField} label="First Name" />
-        <Field name="lastName" type="text" component={renderField} label="Last Name" />
+        <Field name="firstName" type="text" component={renderField} label="Etunimi" />
+        <Field name="lastName" type="text" component={renderField} label="Sukunimi" />
+        
+        { flow === "small" ? 
+          <Field name="lastName" type="text" component={renderField} label="Osoite" />
+           : null
+        }
+
         <div>
           <button type="submit" className="next">Next</button>
         </div>

@@ -9,7 +9,8 @@ export const FORM_CHANGE = 'FORM_CHANGE'
 export function formChange (value) {
   return {
     type    : FORM_CHANGE,
-    payload : value
+    payload : value,
+    flow
   }
 }
 
@@ -24,8 +25,12 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = null
-export default function formReducer (state = initialState, action) {
+export default function formReducer (state = initialState, action, props) {
   const handler = ACTION_HANDLERS[action.type]
   
-  return handler ? handler(state, action) : state
+  return {
+  	handler: state,
+  	flow: props, 
+  }
+  //return handler ? handler(state, action) : state
 }

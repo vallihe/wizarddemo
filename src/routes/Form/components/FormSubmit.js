@@ -37,7 +37,7 @@ const FormSubmit = (props) => {
 }
 */
 FormSubmit.propTypes = {
-  firstName: PropTypes.object,
+  //firstName: PropTypes.object,
   getForm: PropTypes.object
 }
 
