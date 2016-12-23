@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import validate from './validate'
+import '../../../styles/components/form.scss'
 import FormFirstPage from '../../../components/Forms/FormFirstPage'
 import FormSecondPage from '../../../components/Forms/FormSecondPage'
 import FormThirdPage from '../../../components/Forms/FormThirdPage'
@@ -47,6 +48,18 @@ class Form extends Component {
     console.log(this.state)
   }
 
+  chooseMedium = () => {
+    const mediumForm = { flow: 'medium' }
+    this.setState(mediumForm)
+    console.log(this.state)
+  }
+
+  chooseLarge = () => {
+    const largeForm = { flow: 'large' }
+    this.setState(largeForm)
+    console.log(this.state)
+  }
+
   onSubmit = () => {
     //console.log(this.props)
     //this.props({ firstname: Form.form.Form.values.firstName, lastname: Form.form.Form.values.lastName })
@@ -61,10 +74,14 @@ class Form extends Component {
     const { page } = this.state
     return (
       <div>
-        <p onClick={this.chooseSmall}>Suppea</p>
+        <div className="form--link">
+          <p onClick={this.chooseSmall}>Suppea</p>
+          <p onClick={this.chooseMedium}>Perusmuotoinen</p>
+          <p onClick={this.chooseLarge}>Laaja</p>
+        </div>
         {page === 1 && <FormFirstPage onSubmit={this.nextPage} flow={this.state.flow}/>}
-        {page === 2 && <FormSecondPage previousPage={this.previousPage} onSubmit={this.nextPage} flow="medium large"/>}
-        {page === 3 && <FormThirdPage previousPage={this.previousPage} onSubmit={this.nextPage} flow="large"/>}
+        {page === 2 && <FormSecondPage previousPage={this.previousPage} onSubmit={this.nextPage} flow={this.state.flow}/>}
+        {page === 3 && <FormThirdPage previousPage={this.previousPage} onSubmit={this.nextPage} flow={this.state.flow}/>}
         {page === 4 && <FormSubmit {...getForm} previousPage={this.previousPage} handleForm={this.handleForm} />}
       </div>
     )

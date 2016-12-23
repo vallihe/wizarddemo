@@ -1,6 +1,10 @@
 const argv = require('yargs').argv
 const webpack = require('webpack')
 const cssnano = require('cssnano')
+const ReactWidgets = require('react-widgets')
+const Globalize = require("globalize");
+
+const globalizeLocalizer = require("react-widgets/lib/localizers/globalize");
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const project = require('./project.config')
@@ -9,6 +13,7 @@ const debug = require('debug')('app:config:webpack')
 const __DEV__ = project.globals.__DEV__
 const __PROD__ = project.globals.__PROD__
 const __TEST__ = project.globals.__TEST__
+
 
 debug('Creating configuration.')
 const webpackConfig = {
@@ -153,6 +158,16 @@ webpackConfig.module.loaders.push({
     'postcss'
   ]
 })
+webpackConfig.module.loaders.push({
+  test    : /\.less$/,
+  exclude : null,
+  loaders : [
+    'style',
+    BASE_CSS_LOADER,
+    'postcss',
+    'less-loader?sourceMap'
+  ]
+})
 
 webpackConfig.sassLoader = {
   includePaths : project.paths.client('styles')
@@ -185,7 +200,9 @@ webpackConfig.module.loaders.push(
   { test: /\.ttf(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream' },
   { test: /\.eot(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]' },
   { test: /\.svg(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
-  { test: /\.(png|jpg)$/,    loader: 'url?limit=8192' }
+  { test: /\.(png|jpg)$/,    loader: 'url?limit=8192' },
+  { test: /\.gif$/,          loader: "url-loader?mimetype=image/png" }
+  //{ test: /\.gif(\?.*)?$/,   loader: 'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'}
 )
 /* eslint-enable */
 

@@ -1,0 +1,44 @@
+.form--link {
+  display: inline;
+}
+.form--link p {
+	margin: 10px;
+	cursor: hand;
+	display: inline-block;
+}
+.form--link p:hover {
+	cursor: pointer;
+  font-weight: bold;
+}
+.form--link p:active {
+  font-weight: bold;
+}
+
+.form--content {
+	margin-top: 20px;
+	width: 80%;
+}
+.form--label {
+	text-align: left;
+	width: 100px;
+	display: inline-block;
+}
+.form--input {
+	display: inline;
+	width: 150px;
+}
+.form--button {
+	margin-top: 20px;
+	float: right;
+}
+.form--left {
+	position: relative; 
+	right: 5px;
+}
+.form--radiobutton {
+	margin-right: 10px;
+}
+.form--radiobuttonlabel {
+	padding-left: 10px;
+	display: inline-block;
+}

@@ -38,8 +38,8 @@ const FormThirdPage = (props) => {
         </div>
       </div>
       <div>
-        <button type="button" className="previous" onClick={previousPage}>Previous</button>
-        <button type="submit" onSubmit={handleSubmit}>Submit</button>
+        <button type="button" className="previous" onClick={previousPage}>Edellinen</button>
+        <button type="submit" onSubmit={handleSubmit}>Lähetä</button>
       </div>
     </form>
   )

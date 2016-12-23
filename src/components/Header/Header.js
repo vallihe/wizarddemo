@@ -1,6 +1,6 @@
 import React from 'react'
 import { IndexLink, Link } from 'react-router'
-import './Header.scss'
+import '../../styles/components/header.scss'
 
 export const Header = () => (
   <div>
@@ -15,10 +15,6 @@ export const Header = () => (
     {' · '}
     <Link to='/form' activeClassName='route--active'>
       Form
-    </Link>
-    {' · '}
-    <Link to='/standardform' activeClassName='route--active'>
-      Standard Form
     </Link>
   </div>
 )
