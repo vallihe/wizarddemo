@@ -10,6 +10,7 @@ export function formChange (value) {
   return {
     type    : FORM_CHANGE,
     payload : value,
+    label,
     flow
   }
 }
@@ -30,7 +31,8 @@ export default function formReducer (state = initialState, action, props) {
   
   return {
   	handler: state,
-  	flow: props, 
+  	flow: props,
+    label: props, 
   }
   //return handler ? handler(state, action) : state
 }

@@ -6,23 +6,27 @@ import Calendar from 'react-widgets/lib/Calendar'
 import moment from 'moment'
 import 'react-widgets/lib/less/react-widgets.less'
 
+//import FormDatepicker from '../calendar'
 import validate from '../../routes/Form/components/validate'
 import renderField from '../../routes/Form/components/renderField'
 import '../../styles/components/form.scss'
+import { getForm } from '../../routes/Form/components/Form'
 
 momentLocalizer(moment)
 moment.locale("fi")
 
-const FormDatepicker = (input, props) => {
-  const selected = input ? new Date(input) : null
-  return ( <Calendar {...input} onChange={({selected}).onChange} value={this.state} format="mmm YYY" /> ) 
+const FormDatepicker = ({ input: { onChange, value }, type }) => {
+  //const selected = input.value ? new Date(input.value) : null
+  console.log(Calendar)
+  return ( <Calendar defaultValue={new Date()} type={type} onChange={onChange} value={value && new Date(value) || null } format="DD MMM YYYY" /> ) 
+
 }
 
 let FormFirstPage = (props) => {
 
   console.log(props.flow);
   //debugger;
-  const { flow, handleSubmit } = props
+  const { flow, handleSubmit, values } = props
   return (
     <div className="form--content">
       <form onSubmit={handleSubmit}>
@@ -36,12 +40,16 @@ let FormFirstPage = (props) => {
         }
         { 
           flow === "medium" ? 
-          <FormDatepicker />
+          <div>
+            <Field name="calendar" type="text" component={FormDatepicker} label="Kalenteri" />
+            {console.log(getForm)}
+            <p></p>
+          </div>
            : null
-        }
+          }
         { 
           flow === "large" ? 
-          <Calendar format="mmm YYY" />
+          <Field name="calendar" type="text" component={FormDatepicker} label="Kalenteri" />
            : null
         }
 
@@ -52,10 +60,6 @@ let FormFirstPage = (props) => {
     </div>
   ) 
 }
-
-/*FormFirstPage.propTypes = {
-  onSubmit: PropTypes.func.isRequired
-}*/
 
 const selector = formValueSelector('Form')
 

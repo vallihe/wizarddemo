@@ -21,6 +21,7 @@ return (
     <p>Sukunimi: { values.lastName }</p>
     <p>Sähköposti: { values.email }</p>
     <p>Sukupuoli: { values.sex }</p>
+    <p>Syntymäaika: { values.calendar.toDateString() }</p>
   </div>
   )
 }

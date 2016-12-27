@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { browserHistory } from 'react-router'
 
 import validate from './validate'
 import '../../../styles/components/form.scss'
@@ -18,6 +19,7 @@ class Form extends Component {
     dispatch: PropTypes.func,
     fields: PropTypes.object,
     values: PropTypes.object,
+    label: PropTypes.object,
   }
 
   constructor(props) {
@@ -28,15 +30,35 @@ class Form extends Component {
       page: 1,
       flow: [],
     }
+    this.components = [
+      { component: FormFirstPage, pagename: "/1"  },
+      { component: FormSecondPage, pagename: "/2"  },
+      { component: FormThirdPage, pagename: "/3"  },
+      { component: FormSubmit, pagename: "/4"  }
+    ]
+
     this.onSubmit = this.onSubmit.bind(this)
   }
 
   nextPage() {
     this.setState({ page: this.state.page + 1 })
+    browserHistory.push(this.components[this.state.page-1].pagename)
   }
 
   previousPage() {
     this.setState({ page: this.state.page - 1 })
+    history.pushState(null, null, this.components[page-1].pagename);
+  }
+
+  componentWillMount() {
+    var page = 1;
+    for (var i = 0, l = this.components.length; i < l; i++) {
+      if (this.components[i].pagename == this.props.location.pathname){
+        page = i+1;
+        break;
+      }
+    }
+    this.setState({page: page});
   }
 
   handleForm = () => {
@@ -79,7 +101,7 @@ class Form extends Component {
           <p onClick={this.chooseMedium}>Perusmuotoinen</p>
           <p onClick={this.chooseLarge}>Laaja</p>
         </div>
-        {page === 1 && <FormFirstPage onSubmit={this.nextPage} flow={this.state.flow}/>}
+        {page === 1 && <FormFirstPage {...getForm} onSubmit={this.nextPage} flow={this.state.flow}/>}
         {page === 2 && <FormSecondPage previousPage={this.previousPage} onSubmit={this.nextPage} flow={this.state.flow}/>}
         {page === 3 && <FormThirdPage previousPage={this.previousPage} onSubmit={this.nextPage} flow={this.state.flow}/>}
         {page === 4 && <FormSubmit {...getForm} previousPage={this.previousPage} handleForm={this.handleForm} />}
@@ -114,6 +136,7 @@ Form = reduxForm({
     //flow: {},
     onSubmit: FormSubmit,
     fields: [],
+    label: [],
     validate
 })(Form)
 

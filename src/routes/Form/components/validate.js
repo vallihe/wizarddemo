@@ -17,6 +17,9 @@ const validate = values => {
   if (!values.favoriteColor) {
     errors.favoriteColor = 'Required'
   }
+  if (!values.calendar) {
+    errors.calendar = 'Required'
+  }
   return errors
 }
 
