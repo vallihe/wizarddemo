@@ -36,9 +36,12 @@ class Form extends Component {
       { page: 3, component: FormThirdPage, pagename: location.pathname + "/3" },
       { page: 4, component: FormSubmit, pagename: location.pathname + "/4" },
     ]
-    for (let i = 1; i <= this.components.length; i++) {
-      this.components.page = i
-    }
+   /* for (let i = 1; i <= this.components.length; i++) {
+      this.components[0] = 1;
+      this.components[1] = 2;
+      this.components[2] = 3;
+      this.components[3] = 4;
+    }*/
 
     this.onSubmit = this.onSubmit.bind(this)
   }
@@ -51,16 +54,18 @@ class Form extends Component {
 
   previousPage() {
     this.setState({ page: this.state.page - 1 })
-    browserHistory.push(this.components[this.state.page].pagename)
-    //history.pushState(null, null, this.components[this.state.page].pagename);
+    //browserHistory.push(this.components[this.state.page].pagename)
+    console.log(this.state.page)
+    history.pushState(this.components.component, null, this.state.page - 1 );
+    //history.pushState(this.components.component, null, this.components[this.state.page].pagename);
     console.log(location.pathname)
   }
 
-  componentWillMount() {
-    var page = 1;
+  componentDidMount() {
+    let page = 1;
     for (var i = 1, l = this.components.page; i < l; i++) {
       if (this.components[i].pagename == location.pathname){
-        page = i+1;
+        this.state.page = i+1;
         break;
       }
     }
@@ -100,8 +105,8 @@ class Form extends Component {
     console.log(this.props)
     const { flow, getForm, onSubmit, fields, values, handleForm } = this.props
     const { page } = this.state
-    const { component } = this.components
-    console.log(this.components)
+    console.log(this.state.page)
+    //const { component } = this.components
     return (
       <div>
         <div className="form--link">
