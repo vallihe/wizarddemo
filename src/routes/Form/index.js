@@ -9,6 +9,10 @@ import { reducer as reduxFormReducer } from 'redux-form'
 import { injectReducer } from '../../store/reducers' */
 
 import Form from './components/Form'
+import FormFirstPage from '../../components/Forms/FormFirstPage'
+import FormSecondPage from '../../components/Forms/FormSecondPage'
+import FormThirdPage from '../../components/Forms/FormThirdPage'
+import FormSubmit from './components/FormSubmit'
 //import { App, Code, Markdown, Values, generateExampleBreadcrumbs } from 'redux-form-website-template'
 
 //const dest = document.getElementById('content')
@@ -35,7 +39,15 @@ let render = () => {
 
 export default (store) => ({
   path : 'form',
-
+  //component   : Form,
+  indexRoute  : Form,
+  childRoutes : [
+    { path: '1', component: FormFirstPage },
+    { path: '2', component: FormSecondPage },
+    { path: '3', component: FormThirdPage },
+    { path: '4', component: FormSubmit }
+  ],
+  
   getComponent (nextState, cb) {
     console.log(nextState.location.pathname)
   	require.ensure([], (require) => {
@@ -48,6 +60,3 @@ export default (store) => ({
   		}, 'form')
   	} 	
   })
-
-
-

@@ -31,29 +31,35 @@ class Form extends Component {
       flow: [],
     }
     this.components = [
-      { component: FormFirstPage, pagename: "/1"  },
-      { component: FormSecondPage, pagename: "/2"  },
-      { component: FormThirdPage, pagename: "/3"  },
-      { component: FormSubmit, pagename: "/4"  }
+      { page: 1, component: FormFirstPage, pagename: location.pathname + "/1" },
+      { page: 2, component: FormSecondPage, pagename: location.pathname + "/2" },
+      { page: 3, component: FormThirdPage, pagename: location.pathname + "/3" },
+      { page: 4, component: FormSubmit, pagename: location.pathname + "/4" },
     ]
+    for (let i = 1; i <= this.components.length; i++) {
+      this.components.page = i
+    }
 
     this.onSubmit = this.onSubmit.bind(this)
   }
 
   nextPage() {
     this.setState({ page: this.state.page + 1 })
-    browserHistory.push(this.components[this.state.page-1].pagename)
+    browserHistory.push(this.components[this.state.page].pagename)
+    console.log(location.pathname)
   }
 
   previousPage() {
     this.setState({ page: this.state.page - 1 })
-    history.pushState(null, null, this.components[page-1].pagename);
+    browserHistory.push(this.components[this.state.page].pagename)
+    //history.pushState(null, null, this.components[this.state.page].pagename);
+    console.log(location.pathname)
   }
 
   componentWillMount() {
     var page = 1;
-    for (var i = 0, l = this.components.length; i < l; i++) {
-      if (this.components[i].pagename == this.props.location.pathname){
+    for (var i = 1, l = this.components.page; i < l; i++) {
+      if (this.components[i].pagename == location.pathname){
         page = i+1;
         break;
       }
@@ -94,6 +100,8 @@ class Form extends Component {
     console.log(this.props)
     const { flow, getForm, onSubmit, fields, values, handleForm } = this.props
     const { page } = this.state
+    const { component } = this.components
+    console.log(this.components)
     return (
       <div>
         <div className="form--link">
