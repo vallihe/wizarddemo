@@ -40,7 +40,7 @@ let render = () => {
 export default (store) => ({
   path : 'form',
   //component   : Form,
-  indexRoute  : Form,
+  indexRoute  : { onEnter: (nextState, replace) => replace('form/1') },
   childRoutes : [
     { path: '1', component: FormFirstPage },
     { path: '2', component: FormSecondPage },

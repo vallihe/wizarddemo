@@ -5,6 +5,7 @@ import momentLocalizer from 'react-widgets/lib/localizers/moment'
 import Calendar from 'react-widgets/lib/Calendar'
 import moment from 'moment'
 import 'react-widgets/lib/less/react-widgets.less'
+import { browserHistory } from 'react-router'
 
 //import FormDatepicker from '../calendar'
 import validate from '../../routes/Form/components/validate'
@@ -22,10 +23,11 @@ const FormDatepicker = ({ input: { onChange, value }, type }) => {
 
 }
 
-let FormFirstPage = (props) => {
+let FormFirstPage = (props, state) => {
 
   console.log(props.flow);
   //debugger;
+  
   const { flow, handleSubmit, values } = props
   return (
     <div className="form--content">
