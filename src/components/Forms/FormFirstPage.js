@@ -13,6 +13,8 @@ import renderField from '../../routes/Form/components/renderField'
 import '../../styles/components/form.scss'
 import { getForm } from '../../routes/Form/components/Form'
 
+const { DOM: {input} } = React
+
 momentLocalizer(moment)
 moment.locale("fi")
 
@@ -25,14 +27,14 @@ const FormDatepicker = ({ input: { onChange, value }, type }) => {
 
 let FormFirstPage = (props, state) => {
 
-  console.log(props.flow);
+  console.log(props.firstName);
   //debugger;
   
-  const { flow, handleSubmit, values } = props
+  const { firstName, lastName, flow, handleSubmit, values } = props
   return (
     <div className="form--content">
       <form onSubmit={handleSubmit}>
-        <Field name="firstName" type="text" component={renderField} label="Etunimi" />
+        <Field name="firstName" type="text" placeholder={props.firstName} component={renderField} label="Etunimi" />
         <Field name="lastName" type="text" component={renderField} label="Sukunimi" />
         
         { 
@@ -63,20 +65,31 @@ let FormFirstPage = (props, state) => {
   ) 
 }
 
+/*const mapStateToProps = (state) => ({  
+  onSubmit: PropTypes.func.isRequired,
+}) */
+
+const mapDispatchToProps = (dispatch) => ({
+    firstName: () => { dispatch (Form(state.form.form.Form.values.firstName)) },
+    lastName: () => { dispatch (Form(state.form.form.Form.values.lastName)) }
+})
+
 const selector = formValueSelector('Form')
 
 FormFirstPage = connect(
-  state => {
-    const firstName = selector(state, 'firstName')
-    const lastName = selector(state, 'lastName')
+  state => ({ firstName: state.form.form.Form.values, lastName: state.form.form.Form.values
+  }),
+    //{  
+    //const firstName = selector(state, 'firstName')
+    //const lastName = selector(state, 'lastName')
     //const {firstName, lastName} = selector(state, 'firstName', 'lastName')
 
-    return {
+    /*return {
       firstName,
       lastName
       //fullName: `${firstName || ''} ${lastName || ''}`     
-    }
-  })(FormFirstPage)
+    }*/
+  )(FormFirstPage)
 
 
 /*export default FormFirstPage */
@@ -86,5 +99,6 @@ FormFirstPage = connect(
   renderField,
   FormDatepicker,
   destroyOnUnmount: false,
+  fields: ['firstName', 'lastName'],
   validate
-})(FormFirstPage)
+}, mapDispatchToProps)(FormFirstPage)

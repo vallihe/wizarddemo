@@ -65,14 +65,14 @@ class Form extends Component {
     var page = this.state.page - 1
     //browserHistory.push(this.components[this.state.page].pagename)
     //console.log(this.state.page)
-    history.pushState(this.components.component, null, "/form/" + this.props.route.childRoutes[page-1].path);
+    history.pushState(null, null, "/form/" + this.props.route.childRoutes[page-1].path);
     //history.pushState(this.components.component, null, this.components[this.state.page].pagename);
     //console.log(location.pathname)
     this.setState({ page: page })
   }
 
-  /*onBackButtonEvent = (e) => {
-    //e.preventDefault();
+  onBackButtonEvent = (e) => {
+    e.preventDefault();
     //this.goBack();
     //this.setState({ page: this.state.page })
     //this.state.page == location.pathname
@@ -83,7 +83,7 @@ class Form extends Component {
     console.log(history)
     console.log(browserHistory)
     //this.forceUpdate()
-  }*/
+  }
 
   componentDidMount() {
     let oldPushState = window.history.pushState
@@ -234,7 +234,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators(Object.assign({}), Form, dispatch),
-    Form
+    Form: () => { dispatch (Form(state.form.form.Form.values)) },
 })
 
 Form = reduxForm({
