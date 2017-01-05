@@ -27,14 +27,22 @@ const FormDatepicker = ({ input: { onChange, value }, type }) => {
 
 let FormFirstPage = (props, state) => {
 
-  console.log(props.firstName);
-  
-  const { firstName, lastName, flow, handleSubmit, values } = props
+  var firstName = []
+  var lastName = []
+  if (props.values == undefined) {
+    firstName = null
+    lastName = null
+  } else {
+    firstName = props.values.firstName
+    lastName = props.values.lastName
+  }
+
+  const { flow, handleSubmit, values, value } = props
   return (
     <div className="form--content">
       <form onSubmit={handleSubmit}>
-        <Field name="firstName" type="text" placeholder={props.firstName} component={renderField} label="Etunimi" />
-        <Field name="lastName" type="text" component={renderField} label="Sukunimi" />
+        <Field name="firstName" value={firstName || ""} type="text" component={renderField} label="Etunimi" />
+        <Field name="lastName" value={lastName || ""} type="text" component={renderField} label="Sukunimi" />
         
         { 
           flow === "medium" ? 
@@ -63,20 +71,19 @@ let FormFirstPage = (props, state) => {
     </div>
   ) 
 }
-
-/*const mapStateToProps = (state) => ({  
-  onSubmit: PropTypes.func.isRequired,
+/*
+const mapStateToProps = (state) => ({  
+  values: PropTypes.func.isRequired,
 }) */
 
 const mapDispatchToProps = (dispatch) => ({
-    firstName: () => { dispatch (Form(state.form.form.Form.values.firstName)) },
-    lastName: () => { dispatch (Form(state.form.form.Form.values.lastName)) }
+    values: () => { dispatch (Form(state.form.form.Form.values)) }
 })
 
 const selector = formValueSelector('Form')
 
 FormFirstPage = connect(
-  state => ({ firstName: state.form.form.Form.values, lastName: state.form.form.Form.values
+  state => ({ values: state.form.form.Form.values 
   }),
     //{  
     //const firstName = selector(state, 'firstName')

@@ -234,7 +234,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators(Object.assign({}), Form, dispatch),
-    Form: () => { dispatch (Form(state.form.form.Form.values)) },
+    //Form: () => { dispatch (Form(state.form.form.Form.values)) },
 })
 
 Form = reduxForm({
