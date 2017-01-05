@@ -8,15 +8,18 @@
 }
 .form--link p:hover {
 	cursor: pointer;
-  font-weight: bold;
+  	font-weight: bold;
 }
 .form--link p:active {
-  font-weight: bold;
+  	font-weight: bold;
 }
 
 .form--content {
 	margin-top: 20px;
 	width: 80%;
+}
+.form-row {
+	text-align: left;
 }
 .form--label {
 	text-align: left;

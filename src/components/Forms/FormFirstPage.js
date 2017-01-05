@@ -41,9 +41,14 @@ let FormFirstPage = (props, state) => {
   return (
     <div className="form--content">
       <form onSubmit={handleSubmit}>
-        <Field name="firstName" value={firstName || ""} type="text" component={renderField} label="Etunimi" />
-        <Field name="lastName" value={lastName || ""} type="text" component={renderField} label="Sukunimi" />
-        
+        <div className="form--row">
+          <label className="form--label">Etunimi</label>
+          <Field name="firstName" value={firstName || ""} type="text" component={renderField} label="Etunimi" />
+        </div>
+        <div className="form--row">
+          <label className="form--label">Sukunimi</label>       
+          <Field name="lastName" value={lastName || ""} type="text" component={renderField} label="Sukunimi" />
+        </div>
         { 
           flow === "medium" ? 
           <Field name="osoite" type="text" component={renderField} label="Osoite" />
