@@ -28,7 +28,6 @@ const FormDatepicker = ({ input: { onChange, value }, type }) => {
 let FormFirstPage = (props, state) => {
 
   console.log(props.firstName);
-  //debugger;
   
   const { firstName, lastName, flow, handleSubmit, values } = props
   return (
