@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 import momentLocalizer from 'react-widgets/lib/localizers/moment'
@@ -25,19 +25,26 @@ const FormDatepicker = ({ input: { onChange, value }, type }) => {
 
 }
 
-let FormFirstPage = (props, state) => {
-
-  var firstName = []
-  var lastName = []
-  if (props.values == undefined) {
-    firstName = null
-    lastName = null
-  } else {
-    firstName = props.values.firstName
-    lastName = props.values.lastName
+/*let FormFirstPage = (props, state) => {*/
+class FormFirstPage extends Component {
+  constructor(props){
+    super(props)
   }
 
-  const { flow, handleSubmit, values, value } = props
+
+  
+  render () {
+    var firstName = []
+    var lastName = []
+    if (this.props.values == undefined) {
+      firstName = null
+      lastName = null
+    } else {
+      firstName = this.props.values.firstName
+      lastName = this.props.values.lastName
+    }
+
+  const { flow, handleSubmit, values, value } = this.props
   return (
     <div className="form--content">
       <form onSubmit={handleSubmit}>
@@ -75,6 +82,7 @@ let FormFirstPage = (props, state) => {
       </form>
     </div>
   ) 
+}
 }
 /*
 const mapStateToProps = (state) => ({  

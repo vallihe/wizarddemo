@@ -95,7 +95,7 @@ class Form extends Component {
       }
     }
     this.setState({page: page});
-   // window.onpopstate = this.onBackButtonEvent;
+    //window.onpopstate = this.onBackButtonEvent;
     //this.onBackButtonEvent = oldPushState;
   }
 
